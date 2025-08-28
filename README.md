@@ -1,1 +1,1 @@
-# sinkeisuizyaku
+# シン・経衰弱アプリ
