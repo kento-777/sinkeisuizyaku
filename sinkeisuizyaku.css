@@ -34,10 +34,9 @@
     background: white;
     color: black;
     cursor: default;
-    transform: rotateY('180deg');
   }
-  .card img {
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
+  .matched {
+  transition: background-color 1.5s 0.2s;
+  background-color: #7CFC00; /* 緑色 */
+  box-shadow: 0 0 15px #7CFC00;
   }

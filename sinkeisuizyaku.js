@@ -67,9 +67,18 @@ function startGame() {
     const [a, b] = flipped;
     if (firstCombine.findIndex(pair => pair.includes(a.dataset.symbol)) === firstCombine.findIndex(pair => pair.includes(b.dataset.symbol))) {
       matched += 1;
+
+      //css調整
+      function addCss(){
+        a.classList.add("matched")
+        b.classList.add("matched")
+      }
+      setTimeout(addCss, 600)
+
+
       flipped = [];
       if (matched === cardpair) {
-        setTimeout(() => alert("クリア！おめでとう🎉"), 300);
+        setTimeout(() => alert("クリア！おめでとう🎉"), 1800);
       }
     } else {
       setTimeout(unflipCards, 1000);
