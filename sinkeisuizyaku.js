@@ -66,9 +66,9 @@ function startGame() {
   function checkMatch() {
     const [a, b] = flipped;
     if (firstCombine.findIndex(pair => pair.includes(a.dataset.symbol)) === firstCombine.findIndex(pair => pair.includes(b.dataset.symbol))) {
-      matched += 2;
+      matched += 1;
       flipped = [];
-      if (matched === card.length) {
+      if (matched === cardpair) {
         setTimeout(() => alert("クリア！おめでとう🎉"), 300);
       }
     } else {
