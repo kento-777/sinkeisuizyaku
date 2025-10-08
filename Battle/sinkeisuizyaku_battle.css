@@ -40,3 +40,46 @@
   background-color: #7CFC00; /* 緑色 */
   box-shadow: 0 0 15px #7CFC00;
   }
+
+  .matched_1p {
+  transition: background-color 1.5s 0.2s;
+  background-color: #ff5353; 
+  box-shadow: 0 0 15px #ff5353;
+  }
+
+  .matched_2p {
+  transition: background-color 1.5s 0.2s;
+  background-color: #5877ff; 
+  box-shadow: 0 0 15px #5877ff;
+  }
+
+  
+  .player_1 {
+    float: left;
+    margin: 20px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    width: 120px;
+    height: 100px;
+  }
+
+  .player_2 {
+    float: right;
+    margin: 20px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    width: 120px;
+    height: 100px;
+  }
+
+    .player_1.play_1p {
+    transition: background-color 0.5s;
+    background-color: #ff5353; 
+  }
+
+  .player_2.play_2p {
+    transition: background-color 0.5s;
+    background-color: #5877ff; 
+  }

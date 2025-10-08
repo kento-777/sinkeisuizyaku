@@ -1,24 +1,33 @@
 <!DOCTYPE html>
 <html lang="ja">
- <head>
- <meta charset="utf-8">
- <title>シン・経衰弱</title>
- <meta name="description" content="サイトキャプションを入力">
- <meta name="keywords" content="サイトキーワードを,で区切って入力">
- <link rel="stylesheet" href="sinkeisuizyaku.css">
- <!--[if lt IE 9]>
- <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
- <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
- <![endif]-->
- </head>
- 
- <body>
- <!----- ヘッダー ----->
- <header>NomalMODE</header>
- <!----- ヘッダー END ----->
- 
- <!----- メインコンテンツ ----->
+<head>
+  <meta charset="UTF-8">
+  <title>シン・経衰弱</title>
+  <link rel="stylesheet" href="sinkeisuizyaku_battle.css">
+</head>
+<body>
+<h2>カスタム神経衰弱</h2>
+<div class="player_1">
+  <h3>プレイヤー1</h3>
+  <p id="player_1_point"></p>
+</div>
+<div class="player_2">
+  <h3>プレイヤー2</h3>
+  <p id="player_2_point"></p>
+</div>
+<div id="setup">
+  <p>ペアにしたい文字を入力してね</p>
+  <div>1つ目</div>
+  <input type="text" id="symbolInput_a">
+  <br><br>
+  <div>2つ目</div>
+  <input type="text" id="symbolInput_b">
+  <br><br>
+  <button id="matchbtn">ペア決定</button>
+  <button id="startBtn">ゲーム開始</button>
+</div>
 
- <!----- メインコンテンツ END ----->
- </body>
+<div id="game"></div>
+<script src="sinkeisuizyaku_battle.js"></script>
+</body>
 </html>
