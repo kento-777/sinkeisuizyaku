@@ -1,49 +1,78 @@
-    const symbols = ["🍎","🍊","🍇","🍉","🍓","🥝","🍒","🍍"];
-    let cards = [...symbols, ...symbols];
-    cards.sort(() => Math.random() - 0.5);
+//ペアの作成
+document.getElementById("matchbtn").addEventListener("click",makePair)
+let cardpair = 0;
+let firstCombine = [];
 
-    const board = document.getElementById("board");
-    let first = null, second = null, lock = false;
-    let moves = 0, matchedCount = 0;
+function makePair() {
+  const input_a = document.getElementById("symbolInput_a").value.trim();
+  const input_b = document.getElementById("symbolInput_b").value.trim();
+  if (!input_a || !input_b) return alert("両方の欄に1つづつ入力してください！");
+  
+  //ペアの配列に代入
+  firstCombine.push([input_a, input_b]);
 
-    cards.forEach(sym => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.dataset.symbol = sym;
-      card.onclick = () => flip(card);
-      board.appendChild(card);
+  //入力欄の初期化
+  document.getElementById("symbolInput_a").value = "";
+  document.getElementById("symbolInput_b").value = "";
+  cardpair += 1;
+}
+
+//ゲームスタート
+document.getElementById("startBtn").addEventListener("click", startGame);
+
+function startGame() {
+  if (cardpair == 0) return alert("少なくとも1ペア入力してください！");
+  
+  // シャッフル
+  let cards = firstCombine.flat()
+  cards.sort(() => Math.random() - 0.5);
+  
+  let flipped = [];
+  let matched = 0;
+  const gameBoard = document.getElementById("game");
+  gameBoard.innerHTML = "";
+  
+  cards.forEach(sym => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.dataset.symbol = sym;
+    
+    card.addEventListener("click", () => {
+      if (card.classList.contains("flipped") || flipped.length === 2) return;
+      flipCard(card);
+      
+      flipped.push(card);
+      if (flipped.length === 2) {
+        checkMatch();
+      }
     });
-
-    function flip(card) {
-      if (lock || card.classList.contains("flipped") || card.classList.contains("matched")) return;
-      card.textContent = card.dataset.symbol;
-      card.classList.add("flipped");
-
-      if (!first) {
-        first = card;
-      } else {
-        second = card;
-        moves++;
-        document.getElementById("moves").textContent = moves;
-        lock = true;
-        setTimeout(check, 800);
+    
+    gameBoard.appendChild(card);
+  });
+  
+  function flipCard(card) {
+    card.classList.add("flipped");
+    card.innerText = card.dataset.symbol;
+  }
+  
+  function unflipCards() {
+    flipped.forEach(card => {
+      card.classList.remove("flipped");
+      card.innerHTML = "";
+    });
+    flipped = [];
+  }
+  
+  function checkMatch() {
+    const [a, b] = flipped;
+    if (firstCombine.findIndex(pair => pair.includes(a.dataset.symbol)) === firstCombine.findIndex(pair => pair.includes(b.dataset.symbol))) {
+      matched += 2;
+      flipped = [];
+      if (matched === card.length) {
+        setTimeout(() => alert("クリア！おめでとう🎉"), 300);
       }
+    } else {
+      setTimeout(unflipCards, 1000);
     }
-
-    function check() {
-      if (first.dataset.symbol === second.dataset.symbol) {
-        first.classList.add("matched");
-        second.classList.add("matched");
-        matchedCount += 2;
-        if (matchedCount === cards.length) {
-          alert(`クリア！めくった回数: ${moves}`);
-        }
-      } else {
-        first.textContent = "";
-        second.textContent = "";
-        first.classList.remove("flipped");
-        second.classList.remove("flipped");
-      }
-      first = second = null;
-      lock = false;
-    }
+  }
+}

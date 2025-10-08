@@ -6,9 +6,21 @@
   <link rel="stylesheet" href="sinkeisuizyaku.css">
 </head>
 <body>
-  <h1>神経衰弱</h1>
-  <div id="info">めくった回数: <span id="moves">0</span></div>
-  <div class="board" id="board"></div>
+<h2>カスタム神経衰弱</h2>
+
+<div id="setup">
+  <p>カードに使いたい文字や画像URLを入力（カンマ区切り）</p>
+  <div>1つ目</div>
+  <input type="text" id="symbolInput_a">
+  <br><br>
+  <div>2つ目</div>
+  <input type="text" id="symbolInput_b">
+  <br><br>
+  <button id="matchbtn">ペア決定</button>
+  <button id="startBtn">ゲーム開始</button>
+</div>
+
+<div id="game"></div>
 <script src="sinkeisuizyaku.js"></script>
 </body>
 </html>
