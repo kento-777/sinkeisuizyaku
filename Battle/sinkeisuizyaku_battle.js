@@ -1,7 +1,7 @@
 //ペアの作成
 document.getElementById("matchbtn").addEventListener("click",makePair);
-let cardpair = 0;
 let firstCombine = [];
+let cardpair = firstCombine.length;
 let message = "";
 
 //turnがtrueの時、1pのターン
@@ -24,7 +24,6 @@ function makePair() {
   //入力欄の初期化
   document.getElementById("symbolInput_a").value = "";
   document.getElementById("symbolInput_b").value = "";
-  cardpair += 1;
 }
 
 //ゲームスタート
