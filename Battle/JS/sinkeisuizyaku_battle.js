@@ -1,11 +1,11 @@
 //ペアの作成
 document.getElementById("matchbtn").addEventListener("click",makePair);
 let firstCombine = [];
-let cardpair = firstCombine.length;
+let cardpair = 0;
 let message = "";
 
 //turnがtrueの時、1pのターン
-let turn = true
+let turn = true;
 
 //プレイヤーの得点
 let point_1p = 0;
@@ -21,6 +21,7 @@ function makePair() {
   //ペアの配列に代入
   firstCombine.push([input_a, input_b]);
 
+
   //入力欄の初期化
   document.getElementById("symbolInput_a").value = "";
   document.getElementById("symbolInput_b").value = "";
@@ -30,8 +31,12 @@ function makePair() {
 document.getElementById("startBtn").addEventListener("click", startGame);
 
 function startGame() {
-  document.querySelector(".player_1").classList.toggle("play_1p")
-  if (cardpair == 0) return alert("少なくとも1ペア入力してください！");
+  let cardpair = firstCombine.length;
+  if (cardpair == 0) {
+    return alert("少なくとも1ペア入力してください！");
+  } else {
+    document.querySelector(".player_1").classList.toggle("play_1p");
+  };
   
   // シャッフル
   let cards = firstCombine.flat()
@@ -42,10 +47,13 @@ function startGame() {
   const gameBoard = document.getElementById("game");
   gameBoard.innerHTML = "";
   
-  cards.forEach(sym => {
+  cards.forEach((sym, index) => {
     const card = document.createElement("div");
     card.classList.add("card");
     card.dataset.symbol = sym;
+
+    //カードに番号を記載
+    card.innerText = index + 1;
     
     //カードをめくる
     card.addEventListener("click", () => {
@@ -56,14 +64,10 @@ function startGame() {
       if (flipped.length === 2) {
         checkMatch();
         document.getElementById("player_1_point").textContent = `${point_1p}pt`;
-        document.getElementById("player_2_point").textContent = `${point_1p}pt`;
+        document.getElementById("player_2_point").textContent = `${point_2p}pt`;
       }
     });
-    
     gameBoard.appendChild(card);
-
-    //得点の更新
-
   });
   
   function flipCard(card) {
@@ -74,7 +78,7 @@ function startGame() {
   function unflipCards() {
     flipped.forEach(card => {
       card.classList.remove("flipped");
-      card.innerHTML = "";
+      card.innerText = [...gameBoard.children].indexOf(card) + 1;
     });
     flipped = [];
   }
@@ -125,7 +129,7 @@ function startGame() {
           setTimeout(() => alert(message), 1800);
       }
     } else {
-      setTimeout(unflipCards, 1000);
+      setTimeout(unflipCards, 2000);
       turn = !turn
       //ポイント更新、ターンチェンジ
       document.querySelector(".player_1").classList.toggle("play_1p");
